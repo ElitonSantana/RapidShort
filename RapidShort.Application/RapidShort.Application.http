@@ -1,0 +1,6 @@
+@RapidShort.Application_HostAddress = http://localhost:5019
+
+GET {{RapidShort.Application_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

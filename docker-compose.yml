@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  webapp:
+    image: mcr.microsoft.com/dotnet/aspnet:8.0
+    container_name: webapp
+    ports:
+      - "8080:80"
+    networks:
+      - mynetwork
+    depends_on:
+      - postgres
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Production"
+      ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=mydatabase;Username=myuser;Password=mypassword"
+    command: tail -f /dev/null
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    networks:
+      - mynetwork
+    environment:
+      POSTGRES_DB: RapidShort
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+
+networks:
+  mynetwork:
